@@ -6,6 +6,8 @@ from nGPS01 import *
 
 print "TourPiTour v0.5.3 starting up..."
 
+#Start up for the system.
+
 mifare = nxppy.Mifare()
 GPIO.setwarnings(False)
 list = []
@@ -28,7 +30,7 @@ def CheckCard(uid):
 		return True
 	else:
 		return False
-	print "I checked yo"
+#	print "Check Done"
 
 time.sleep(5)
 while 1:
@@ -50,10 +52,10 @@ while 1:
 				proc = subprocess.Popen('ps -al | grep omxplayer', stdout = subprocess.PIPE, shell = True)
 				time.sleep(.1)
 				tmp = proc.stdout.read()
-				print "I checked"
+#				print "I checked"
 				try:
 					if tmp[0] != '0':
-						print "I Broke"
+#						print "Frunction Break"
 						break
 				except:		
 					break
