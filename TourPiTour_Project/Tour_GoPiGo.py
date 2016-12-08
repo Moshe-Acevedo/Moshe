@@ -11,8 +11,8 @@ print "TourPiTour v0.5.3 starting up..."
 mifare = nxppy.Mifare()
 GPIO.setwarnings(False)
 list = []
-uid = 'chicken'
-uidb = 'chicken'
+uid = 'nothing'
+uidb = 'nothing'
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(40,GPIO.OUT)
 GPIO.setup(38,GPIO.OUT)
