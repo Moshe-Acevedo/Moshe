@@ -4,8 +4,6 @@ import subprocess
 import RPi.GPIO as GPIO
 from nGPS01 import *
 
-print "TourPiTour v0.5.3 starting up..."
-
 #Start up for the system.
 
 mifare = nxppy.Mifare()
@@ -31,6 +29,7 @@ def CheckCard(uid):
 	else:
 		return False
 #	print "Check Done"
+#Main Function Begins Here.
 
 time.sleep(5)
 while 1:
