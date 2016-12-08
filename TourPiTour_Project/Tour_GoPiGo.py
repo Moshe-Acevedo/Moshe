@@ -46,7 +46,7 @@ while 1:
 			Write('ON',40,38)
 			time.sleep(.1)
 			Write('OFF',40,38)
-			subprocess.call("./VideoPlayerBash.sh &", shell = True)
+			subprocess.call("kill $(ps -al | grep omxplayer | awk $'{print $4}') &", shell = True)
 			while 1:
 				time.sleep(.5)
 				proc = subprocess.Popen('ps -al | grep omxplayer', stdout = subprocess.PIPE, shell = True)
@@ -61,5 +61,5 @@ while 1:
 					break
 				if CheckCard(uidb):
 					break	
-			subprocess.call("./VideoKiller.sh", shell = True)
+			subprocess.call("kill $(ps -al | grep omxplayer | awk $'{print $4}')", shell = True)
 
