@@ -4,17 +4,6 @@ from math import *
 import nGPS01
 import RPi.GPIO as GPIO
 
-######################################################################################
-# 
-# _To_do_ List_
-# Check servo functions for ScanWall().
-# Finish CheckForCard().
-# Try to write PosProject(), check gopigo.py for wheel distance calculations.
-# Test without CheckForCard().
-# Test in Conjunction with All Systems. 
-#
-######################################################################################
-
 def StartUp():
 	GPIO.setmode(GPIO.BOARD)
 	GPIO.setup(40,GPIO.IN)
@@ -56,12 +45,12 @@ def CalculateTurn(Direction):
 	time.sleep(.1)
 	b = GetDistance()
 	time.sleep(.1)
-	chicken = pow(b,2) + pow(c,2) - 2*b*c*cos(pi/6)
-	a = sqrt(chicken)
-	chicken2 = (float(c)*sin(pi/6))/a
-	chicken3 = asin(chicken2)
-	chicken4 = chicken3*180.0/pi
-	return chicken4, c
+	LoC = pow(b,2) + pow(c,2) - 2*b*c*cos(pi/6)
+	a = sqrt(LoC)
+	LoS = (float(c)*sin(pi/6))/a
+	LoS2 = asin(LoS)
+	Angle = LoS2*180.0/pi
+	return Angle, c
 	
 
 	
@@ -108,7 +97,7 @@ def WaitToStop():
 		if distance1 == distance2:
 			break
 
-def FollowWall(dir,x):
+def FollowWall(dir):
 	fwd()
 	set_speed(200)
 	while 1:
@@ -119,7 +108,7 @@ def FollowWall(dir,x):
 		Distance1 = GetDistance()
 		time.sleep(.1)
 		Distance2 = GetDistance()
-		z = Distance1-Distance2  ## check this 
+		z = Distance1-Distance2
 		if z > 0:
 			zed = z//0.5
 			set_left_speed(spd-1-zed)
@@ -135,22 +124,19 @@ def FollowWall(dir,x):
 			break
 		else:
 			pass
-		x=x+1
-		if x == 400:
-			break
 		
 def CleanUp():
 	stop()
 	disable_servo()
+	
+#Main Starts Here
 
 time.sleep(5)
-#StartUp()
+StartUp()
+FirstFix()
 Direction = 'Left'
 print Direction
 servo(72)
 time.sleep(0.5)
-a,c = CalculateTurn('Left')
-print a, c
-x = 0
-#FollowWall(Direction,x)
-#CleanUp()
+FollowWall(Direction,x)
+CleanUp()
